@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Estilos</title>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .question-container {
+      display: none;
+    }
+
+    .question-container.active {
+      display: block;
+    }
+
+    .question {
+      font-size: 1.2rem; 
+      font-weight: bold; 
+      color: #333333;
+      margin-bottom: 20px;
+      padding-bottom: 10px; 
+      border-bottom: 2px solid #cccccc; 
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option {
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      padding: 15px;
+      font-size: 1rem;
+      color: #333333;
+      cursor: pointer;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .option:hover {
+      background-color: #f7f7f7;
+      border-color: #999999;
+    }
+
+    .option.selected {
+      border-color: #333333;
+      background-color: #eaeaea;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px 20px;
+      background-color: #333333;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #555555;
+    }
+
+    #result {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #result h1 {
+      font-size: 1.5rem;
+      color: #333333;
+    }
+
+    #result p {
+      font-size: 1rem;
+      color: #666666;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .error.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Perguntas -->
+    <div id="question1" class="question-container active">
+      <p class="question">1 → Como você prefere organizar suas tarefas?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 1, 'A')">A. Usando tabelas, listas ou gráficos.</div>
+        <div class="option" onclick="selectOption(this, 1, 'B')">B. Falando sobre elas ou gravando notas de voz.</div>
+        <div class="option" onclick="selectOption(this, 1, 'C')">C. Fazendo testes práticos ou simulações.</div>
+      </div>
+      <p id="error1" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+
+    <div id="question2" class="question-container">
+      <p class="question">2 → Como você aprende melhor?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 2, 'A')">A. Vendo diagramas ou mapas mentais.</div>
+        <div class="option" onclick="selectOption(this, 2, 'B')">B. Ouvindo explicações ou podcasts.</div>
+        <div class="option" onclick="selectOption(this, 2, 'C')">C. Praticando ou experimentando.</div>
+      </div>
+      <p id="error2" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+    
+     <div id="question3" class="question-container">
+      <p class="question">3 → Qual sua estratégia preferida para resolver problemas?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 3, 'A')">A. Criando um esquema ou desenhando.</div>
+        <div class="option" onclick="selectOption(this, 3, 'B')">B. Conversando/Explicando sobre o problema com alguém.</div>
+        <div class="option" onclick="selectOption(this, 3, 'C')">C. Tentando resolver na prática.</div>
+      </div>
+      <p id="error3" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+    
+     <div id="question4" class="question-container">
+      <p class="question">4 → Qual atividade você prefere em momentos de aprendizado?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 4, 'A')">A. Assistir a vídeos explicativos.</div>
+        <div class="option" onclick="selectOption(this, 4, 'B')">B. Participar de debates ou discussões.</div>
+        <div class="option" onclick="selectOption(this, 4, 'C')">C. Fazer exercícios práticos ou projetos.</div>
+      </div>
+      <p id="error4" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+    
+     <div id="question5" class="question-container">
+      <p class="question">5 → Quando precisa se concentrar, você prefere...</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 5, 'A')">A. Estar em um ambiente visualmente organizado e silencioso.</div>
+        <div class="option" onclick="selectOption(this, 5, 'B')">B. Colocar um podcast ou música de fundo para se inspirar.</div>
+        <div class="option" onclick="selectOption(this, 5, 'C')">C. Mexer nas coisas enquanto pensa ou trabalha.</div>
+      </div>
+      <p id="error5" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+    
+     <div id="question6" class="question-container">
+      <p class="question">6 → Como você organiza suas ideias para um projeto?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 6, 'A')">A. Uso diagramas ou esquemas para organizar os passos.</div>
+        <div class="option" onclick="selectOption(this, 6, 'B')">B. Faço brainstorm em grupo ou gravo anotações de voz.</div>
+        <div class="option" onclick="selectOption(this, 6, 'C')">C. Começo a trabalhar imediatamente e ajusto enquanto avanço.</div>
+      </div>
+      <p id="error6" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+      
+    </div>
+     <div id="question7" class="question-container">
+      <p class="question">7 → Qual sua ferramenta preferida para organização?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 7, 'A')">A. Planner digital ou ferramentas visuais como Notion ou Trello.</div>
+        <div class="option" onclick="selectOption(this, 7, 'B')">B. Áudios ou lembretes de voz no celular.</div>
+        <div class="option" onclick="selectOption(this, 7, 'C')">C. Notas rápidas no papel ou no celular.</div>
+      </div>
+      <p id="error7" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+
+     <div id="question8" class="question-container">
+      <p class="question">8 → Como você costuma reter informações novas?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 8, 'A')">A. Estudando com imagens, gráficos ou mapas mentais.</div>
+        <div class="option" onclick="selectOption(this, 8, 'B')">B. Ouvindo explicações repetidas vezes.</div>
+        <div class="option" onclick="selectOption(this, 8, 'C')">C. Praticando ou ensinando outra pessoa.</div>
+      </div>
+      <p id="error8" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+   
+     <div id="question9" class="question-container">
+      <p class="question">9 → Como você prefere planejar sua semana?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 9, 'A')">A. Criando um calendário ou listas detalhadas de tarefas.</div>
+        <div class="option" onclick="selectOption(this, 9, 'B')">B. Conversando com outras pessoas sobre as prioridades.</div>
+        <div class="option" onclick="selectOption(this, 9, 'C')">C. Começando pelas tarefas práticas e ajustando conforme necessário.</div>
+      </div>
+      <p id="error9" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+    
+     <div id="question10" class="question-container">
+      <p class="question">10 → Durante reuniões ou palestras, você...</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 10, 'A')">A. Anota tópicos importantes em um caderno ou no computador.</div>
+        <div class="option" onclick="selectOption(this, 10, 'B')">B. Se concentra ouvindo e absorve as informações oralmente.</div>
+        <div class="option" onclick="selectOption(this, 10, 'C')">C. Gosta de interagir ou realizar atividades práticas relacionadas ao tema.</div>
+      </div>
+      <p id="error10" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+        
+     <div id="question11" class="question-container">
+      <p class="question">11 → O que mais te ajuda a se motivar em um dia difícil?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 11, 'A')">A. Ver imagens ou lembretes visuais das suas metas.</div>
+        <div class="option" onclick="selectOption(this, 11, 'B')">B. Ouvir palavras de encorajamento ou uma música motivadora.</div>
+        <div class="option" onclick="selectOption(this, 11, 'C')">C. Fazer algo prático que te coloque em movimento.</div>
+      </div>
+      <p id="error11" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">OK</button>
+    </div>
+        
+    <!-- Adicione mais perguntas seguindo o mesmo padrão -->
+
+    <div id="question12" class="question-container">
+      <p class="question">12 → O que mais te incomoda ao trabalhar?</p>
+      <div class="options">
+        <div class="option" onclick="selectOption(this, 12, 'A')">A. Ambientes desorganizados ou visualmente poluídos.</div>
+        <div class="option" onclick="selectOption(this, 12, 'B')">B. Falta de comunicação ou ruídos desnecessários.</div>
+        <div class="option" onclick="selectOption(this, 12, 'C')">C. Ficar parado por muito tempo ou sem interagir com nada.</div>
+      </div>
+      <p id="error12" class="error">Selecione uma resposta antes de continuar.</p>
+      <button onclick="nextQuestion()">Finalizar</button>
+    </div>
+
+    <!-- Resultado -->
+ 	<div id="result" class="question-container">
+      <h1 id="result-title"></h1>
+      <p id="result-text"></p>
+    </div>
+  </div>
+
+  <script>
+    let currentQuestion = 1; // Rastreia qual pergunta está sendo exibida
+    const totalQuestions = 12; // Total de perguntas
+    const answers = {};
+
+    function selectOption(element, question, answer) {
+      const options = element.parentElement.querySelectorAll('.option');
+      options.forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      answers[question] = answer;
+      document.getElementById(`error${question}`).classList.remove('active');
+    }
+
+    function nextQuestion() {
+      const currentContainer = document.getElementById(`question${currentQuestion}`);
+      const errorElement = document.getElementById(`error${currentQuestion}`);
+
+      if (!answers[currentQuestion]) {
+        errorElement.classList.add('active');
+        return;
+      }
+
+      currentContainer.classList.remove('active');
+      currentQuestion++;
+
+      if (currentQuestion <= totalQuestions) {
+        const nextContainer = document.getElementById(`question${currentQuestion}`);
+        nextContainer.classList.add('active');
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const resultContainer = document.getElementById('result');
+      const resultTitle = document.getElementById('result-title');
+      const resultText = document.getElementById('result-text');
+
+      const totalA = Object.values(answers).filter(ans => ans === 'A').length;
+      const totalB = Object.values(answers).filter(ans => ans === 'B').length;
+      const totalC = Object.values(answers).filter(ans => ans === 'C').length;
+
+      if (totalA > totalB && totalA > totalC) {
+        resultTitle.innerText = 'Seu perfil produtivo é Visual!';
+        resultText.innerText = 'Você aprende melhor com diagramas, gráficos e organização visual.';
+      } else if (totalB > totalA && totalB > totalC) {
+        resultTitle.innerText = 'Seu perfil produtivo é Auditivo!';
+        resultText.innerText = 'Você prefere ouvir explicações ou usar áudios para se organizar.';
+      } else if (totalC > totalA && totalC > totalB) {
+        resultTitle.innerText = 'Seu perfil produtivo é Sinestésico!';
+        resultText.innerText = 'Você aprende fazendo e experimentando na prática.';
+      } else if (totalA === totalB && totalA > totalC) {
+        resultTitle.innerText = 'Você possui um perfil equilibrado entre Visual e Auditivo!';
+        resultText.innerText = 'Você aprende melhor utilizando gráficos, listas e mapas mentais, mas também se beneficia ao ouvir explicações ou discutir ideias.';
+      } else if (totalA === totalC && totalA > totalB) {
+        resultTitle.innerText = 'Você possui um perfil equilibrado entre Visual e Sinestésico!';
+        resultText.innerText = 'Você tem uma forte preferência por ferramentas visuais, mas também aprende muito bem ao colocar a mão na massa e experimentar.';
+      } else if (totalB === totalC && totalB > totalA) {
+        resultTitle.innerText = 'Você possui um perfil equilibrado entre Auditivo e Sinestésico!';
+        resultText.innerText = 'Você gosta de aprender ouvindo explicações e compartilhando ideias, mas também se destaca ao aplicar o que aprende na prática.';
+      } else {
+        resultTitle.innerText = 'Você possui um perfil completamente equilibrado!';
+        resultText.innerText = 'Você tem características bem distribuídas entre os três estilos de produtividade. Isso significa que você pode se adaptar bem a diferentes situações e aprender de várias maneiras.';
+      }
+
+      resultContainer.classList.add('active');
+    }
+  </script>
+</body>
+</html>
